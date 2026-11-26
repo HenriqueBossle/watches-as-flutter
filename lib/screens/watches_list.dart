@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'api.dart';
-import 'watch.dart';
+import '../services/api.dart';
+import '../models/watch.dart';
 
 class WatchesList extends StatefulWidget {
   const WatchesList({super.key});
@@ -11,7 +11,7 @@ class WatchesList extends StatefulWidget {
 
 class _WatchesListState extends State<WatchesList> {
   bool _loading = true;
-  String? _erro;
+  String? _error;
   List<Watch> _watches = [];
 
   @override
@@ -22,10 +22,10 @@ class _WatchesListState extends State<WatchesList> {
 
   Future<void> _load() async {
     try {
-      final lista = await Api.buscarWatches();
-      setState(() { _watches = lista; _loading = false; });
+      final list = await Api.gettingWatches();
+      setState(() { _watches = list; _loading = false; });
     } catch (e) {
-      setState(() { _erro = 'Erro ao carregar'; _loading = false; });
+      setState(() { _error = 'Erro ao carregar'; _loading = false; });
     }
   }
 
@@ -35,8 +35,8 @@ class _WatchesListState extends State<WatchesList> {
       appBar: AppBar(title: const Text('Relogios')),
       body: _loading
           ? const Center(child: CircularProgressIndicator())
-          : _erro != null
-              ? Center(child: Text(_erro!))
+          : _error != null
+              ? Center(child: Text(_error!))
               : ListView.builder(
                   itemCount: _watches.length,
                   itemBuilder: (context, i) {
