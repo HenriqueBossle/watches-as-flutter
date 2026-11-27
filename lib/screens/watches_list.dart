@@ -22,10 +22,15 @@ class _WatchesListState extends State<WatchesList> {
 
   Future<void> _load() async {
     try {
-      final list = await Api.gettingWatches();
+      final List<Watch> list = await Api.gettingWatches();
       setState(() { _watches = list; _loading = false; });
     } catch (e) {
-      setState(() { _error = 'Erro ao carregar'; _loading = false; });
+       print('ERRO: $e');
+
+      setState(() {
+        _error = 'Erro ao carregar: $e';
+        _loading = false;
+      });
     }
   }
 

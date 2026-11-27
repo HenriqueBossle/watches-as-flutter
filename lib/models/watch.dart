@@ -1,13 +1,9 @@
-import 'dart:ffi';
-
 class Watch {
   final int id;
   final String brand;
   final String model;
-  final Int price;
+  final double price;
   final String imageUrl;
-  final String origin;
-  final String localization;
 
   Watch({
     required this.id,
@@ -15,18 +11,13 @@ class Watch {
     required this.model,
     required this.price,
     required this.imageUrl,
-    required this.origin,
-    required this.localization
   });
 
-
-    factory Watch.createNewWatch(Map<String, dynamic> myMap) => Watch(
-      id: myMap['id'],
-      brand: myMap['brand'],
-      model: myMap['model'],
-      price: myMap['price'],
-      imageUrl: myMap['image'],
-      origin: myMap['origin']['brand'],
-      localization: myMap['location']['brand'],
-    );
+  factory Watch.createNewWatch(Map<String, dynamic> myMap) => Watch(
+    id: myMap['id'],
+    brand: myMap['brand'],
+    model: myMap['model'],
+    price: double.parse(myMap['price'].toString()),
+    imageUrl: myMap['image_url'],
+  );
 }
