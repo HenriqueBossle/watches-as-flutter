@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import '../services/api.dart';
 import '../models/watch.dart';
+import './watch_detail.dart';
 
 class WatchesList extends StatefulWidget {
   const WatchesList({super.key});
@@ -50,6 +51,12 @@ class _WatchesListState extends State<WatchesList> {
                       leading: CircleAvatar(backgroundImage: NetworkImage(w.imageUrl)),
                       title: Text(w.brand),
                       subtitle: Text('${w.model} · ${w.price}'),
+                      onTap: () => Navigator.push(
+                        context,
+                        MaterialPageRoute(
+                            builder: (_) => WatchDetail(watch: w),
+                        )
+                      )
                     );
                   },
                 ),
